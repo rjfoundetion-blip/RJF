@@ -282,9 +282,62 @@
         .rev-stars { color: #f2c94c; font-size: 12px; margin-bottom: 5px; }
         .rev-text { font-size: 14px; margin: 0; }
 
+/* নতুন নেভিগেশন স্টাইল */
+.nav-menu {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.nav-item:hover {
+    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item i {
+    margin-right: 5px;
+}
+/* এই অংশটুকু আপনার আগের .nav-item স্টাইলের নিচে যোগ করুন */
+.nav-item.active {
+    color: var(--accent-color) !important;
+    border-bottom: 2px solid var(--accent-color);
+    background: rgba(0, 255, 170, 0.1);
+}
+
     </style>
 </head>
-<body>
+<body>  
+    <nav class="nav-menu">
+    <a href="https://rjfoundetion-blip.github.io/RJF/" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+    
+    <a href="https://rjfoundetion-blip.github.io/donation/" class="nav-item"><i class="fas fa-hand-holding-heart"></i> Donation</a>
+    
+    <a href="https://rjfoundetion-blip.github.io/member_selection/" class="nav-item">
+    <i class="fas fa-user-check"></i> Member Selection
+</a>
+    
+    <a href="https://rjfoundetion-blip.github.io/Meeting/" class="nav-item">
+        <i class="fas fa-video"></i> Live Conference
+    </a>
+</nav>
+
 
     <header>
         <div class="lantern-container">
