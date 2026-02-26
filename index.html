@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupsha Public Welfare Foundation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #1c1e21;
+            --card-bg: #ffffff;
+            --header-bg: #0f1c2c;
+            --accent-color: #00ffaa;
+            --font-family: 'Hind Siliguri', 'Poppins', sans-serif;
+        }
+
+        .dark-theme {
+            --bg-color: #121212;
+            --text-color: #e4e6eb;
+            --card-bg: #242526;
+            --header-bg: #000000;
+        }
+
+        body { 
+            font-family: var(--font-family); 
+            background: var(--bg-color); 
+            color: var(--text-color); 
+            margin: 0; 
+            padding: 0; 
+            text-align: center; 
+            transition: all 0.4s ease; 
+        }
+        
+        header { 
+            background: var(--header-bg); 
+            padding: 40px 20px 30px; 
+            color: white; 
+            position: relative;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* লন্ঠন এনিমেশন */
+        .lantern-container {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        .lantern {
+            color: var(--accent-color);
+            font-size: 24px;
+            animation: swing 3s ease-in-out infinite alternate;
+            transform-origin: top center;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* নোটিশ বক্সের উপরে বড় লন্ঠন সারিবদ্ধভাবে */
+        .notice-lanterns {
+            display: flex;
+            justify-content: space-around;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 60px;
+            pointer-events: none;
+        }
+        .big-lantern {
+            color: #ff4b2b;
+            font-size: 35px;
+            animation: swing 2.5s ease-in-out infinite alternate;
+            transform-origin: top center;
+            text-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .big-lantern::before {
+            content: '';
+            width: 2px;
+            height: 20px;
+            background: #888;
+        }
+
+        @keyframes swing {
+            from { transform: rotate(-15deg); }
+            to { transform: rotate(15deg); }
+        }
+
+        .top-controls { position: absolute; top: 15px; right: 15px; display: flex; gap: 12px; z-index: 10; }
+        .control-btn { 
+            background: var(--accent-color); 
+            border: none; 
+            padding: 8px 15px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-family: var(--font-family);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .control-btn:hover { transform: scale(1.05); background: #fff; }
+
+        .logo-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+        }
+        .logo-img { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 50%; 
+            border: 3px solid #fff; 
+            box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+            animation: logo-glow 2s ease-in-out infinite alternate;
+            object-fit: cover;
+        }
+        @keyframes logo-glow {
+            from { box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color); }
+            to { box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color); }
+        }
+        
+        h1 { font-size: 28px; font-weight: 700; letter-spacing: 0.5px; margin: 0; }
+
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+        
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .info-card h2, .info-card h3 { color: var(--accent-color); margin-top: 0; }
+        .info-card p { line-height: 1.7; font-size: 15px; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
+        .feature-list li i { color: var(--accent-color); margin-top: 4px; }
+
+        .btn { 
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 16px; margin: 15px 0; border: none; 
+            border-radius: 12px; font-size: 18px; font-weight: 600; 
+            cursor: pointer; text-decoration: none; transition: 0.3s; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); box-sizing: border-box; 
+        }
+        
+        .btn-donate { background: linear-gradient(45deg, #ff416c, #ff4b2b); color: white; }
+        .btn-conference { background: linear-gradient(45deg, #2193b0, #6dd5ed); color: white; }
+        .btn-member { background: linear-gradient(45deg, #11998e, #38ef7d); color: white; }
+        
+        .card { background: var(--card-bg); padding: 20px; border-radius: 20px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .map-frame { width: 100%; height: 250px; border-radius: 15px; border: none; }
+        .video-card { background: #1a293d; border-radius: 15px; padding: 12px; width: 100%; max-width: 360px; margin: auto; }
+        .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; border-radius: 10px; overflow: hidden; }
+        #player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        .controls { display: flex; justify-content: space-around; margin-top: 15px; gap: 10px; }
+        .controls button { 
+            background: #0f1c2c; border: 2px solid var(--accent-color); 
+            color: var(--accent-color); padding: 10px; border-radius: 10px; 
+            cursor: pointer; flex: 1; font-weight: 600; font-family: var(--font-family);
+        }
+
+        .social-icons { display: flex; justify-content: center; gap: 40px; margin: 30px 0; }
+        .social-icon { font-size: 50px; transition: 0.3s; }
+        .fa-facebook { color: #1877F2; }
+        .fa-youtube { color: #FF0000; }
+
+        footer { background: var(--header-bg); color: #888; padding: 20px; font-size: 15px; font-weight: 600; }
+        
+        .notice-board {
+            background: #ff4b2b;
+            color: white;
+            padding: 15px 10px;
+            margin: 0px 0 30px; 
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+        }
+
+        .chat-container {
+            position: fixed; bottom: 30px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+        }
+        .chat-prompt {
+            background: #fff; color: #333; padding: 8px 15px; border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-size: 13px; font-weight: bold; border: 1px solid #25D366;
+            animation: bounce 2s infinite; position: relative;
+        }
+        .chat-prompt::after {
+            content: ''; position: absolute; bottom: -8px; right: 20px;
+            border-left: 8px solid transparent; border-right: 8px solid transparent;
+            border-top: 8px solid #fff;
+        }
+        .whatsapp-float {
+            background: #25D366; color: white; width: 55px; height: 55px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; box-shadow: 2px 5px 15px rgba(0,0,0,0.3); text-decoration: none;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-5px);}
+            60% {transform: translateY(-3px);}
+        }
+
+        /* স্লাইডারের স্টাইল */
+        .slider-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border: 2px solid var(--accent-color);
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+        .slide {
+            min-width: 100%;
+            height: 300px; 
+            object-fit: cover;
+            display: block;
+        }
+
+        /* রেটিং বক্স স্টাইল */
+        .rating-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--accent-color);
+        }
+        .stars { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .star { font-size: 30px; color: #ccc; cursor: pointer; transition: 0.2s; }
+        .star.active { color: #f2c94c; text-shadow: 0 0 10px #f2c94c; }
+        
+        .rating-summary {
+            background: rgba(0, 255, 170, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .summary-item h4 { margin: 0; font-size: 14px; color: var(--text-color); }
+        .summary-item p { margin: 0; font-size: 20px; font-weight: bold; color: var(--accent-color); }
+
+        .review-input {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd;
+            font-family: inherit; margin-bottom: 10px; box-sizing: border-box;
+            background: var(--bg-color); color: var(--text-color);
+        }
+        .submit-review-btn {
+            background: linear-gradient(45deg, #f2994a, #f2c94c);
+            color: white; border: none; padding: 12px 25px; border-radius: 10px;
+            font-weight: bold; cursor: pointer; width: 100%;
+        }
+        .reviews-display {
+            text-align: left; margin-top: 20px; max-height: 200px; overflow-y: auto;
+            border-top: 1px solid #eee; padding-top: 15px;
+        }
+        .review-item {
+            background: rgba(0,0,0,0.03); padding: 10px; border-radius: 8px; margin-bottom: 10px;
+        }
+        .rev-stars { color: #f2c94c; font-size: 12px; margin-bottom: 5px; }
+        .rev-text { font-size: 14px; margin: 0; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="lantern-container">
+            <div class="lantern"><i class="fas fa-fan"></i></div>
+            <div class="lantern"><i class="fas fa-fan"></i></div>
+        </div>
+        <div class="top-controls">
+            <button class="control-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+            <button class="control-btn" onclick="toggleDarkMode()" id="themeIcon"><i class="fas fa-moon"></i></button>
+        </div>
+        <div class="logo-container">
+            <img src="https://i.ibb.co.com/ycsrjKp6/20251128-004458.jpg" alt="RJF Logo" class="logo-img">
+        </div>
+        <h1 id="title">রুপসা জনকল্যাণ ফাউন্ডেশন </h1>
+    </header>
+
+    <div class="notice-lanterns">
+        <div class="big-lantern"><i class="fas fa-lightbulb"></i></div>
+        <div class="big-lantern"><i class="fas fa-fan"></i></div>
+        <div class="big-lantern"><i class="fas fa-lightbulb"></i></div>
+        <div class="big-lantern"><i class="fas fa-fan"></i></div>
+        <div class="big-lantern"><i class="fas fa-lightbulb"></i></div>
+    </div>
+
+    <div class="container">
+        
+        <div class="notice-board">
+            <marquee behavior="scroll" direction="left">আসন্ন রমজান উপলক্ষে ইফতার সামগ্রী বিতরণ কর্মসূচিতে আমাদের সাথে যোগ দিন। এবং আমাদের ফাউন্ডেশনের নতুন সদস্য নিবন্ধন চালু হয়েছে আজই আমাদের ফরম পূরণ করে আমাদের সাথে যোগ দিন!</marquee>
+        </div>
+
+        <div class="info-card" style="text-align: center; background: #fff3f3; border: 2px solid #ff4b2b;">
+            <h3 id="timer-title" style="color: #ff4b2b; margin-bottom: 5px;"><i class="fas fa-clock"></i> চেক করা হচ্ছে...</h3>
+            <div id="countdown" style="font-size: 35px; font-weight: bold; color: #0f1c2c; font-family: 'Poppins', sans-serif;">00:00:00</div>
+            <p id="timer-status" style="font-size: 14px; margin-top: 5px; color: #555;">অপেক্ষা করুন</p>
+        </div>
+
+<div class="info-card" style="border: 2px solid #2193b0;">
+    <h3 style="color: #2193b0; text-align: center;"><i class="fas fa-mosque"></i> নামাজের সময়সূচী (সিরাজগঞ্জ)</h3>
+    <p id="current-date-prayer" style="font-size: 13px; text-align: center; color: #666; margin-top: -10px;">লোড হচ্ছে...</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;" id="prayer-grid">
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">ফজর</div>
+            <div id="fajr" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">যোহর</div>
+            <div id="dhuhr" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">আসর</div>
+            <div id="asr" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">মাগরিব</div>
+            <div id="maghrib" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">এশা</div>
+            <div id="isha" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+        <div class="prayer-box">
+            <div style="font-size: 12px; color: #666;">সূর্যোদয়</div>
+            <div id="sunrise" style="font-weight: bold; color: var(--text-color);">--:--</div>
+        </div>
+    </div>
+    <p style="font-size: 11px; color: #888; text-align: center; margin-top: 10px;">* ইসলামিক ফাউন্ডেশন ও স্থানীয় মসজিদের সাথে 1-2 মিনিট পার্থক্য হতে পারে।</p>
+</div>
+
+<div class="info-card" style="border-left: 5px solid #11998e; background: #f9f9f9;">
+    <p id="daily-quote" style="font-style: italic; color: #333; font-size: 13px; text-align: center;">
+        "মানুষের সেবা করাই পরম ধর্ম।"
+    </p>
+    <p style="text-align: right; font-size: 9px; color: #888;">— রুপসা জনকল্যাণ ফাউন্ডেশন</p>
+</div>
+
+<script>
+    const quotes = [
+        "সবচেয়ে উত্তম মানুষ সে, যে মানুষের উপকার করে।",
+        "অল্প দানও অনেক বড় সওয়াবের কাজ যদি তা আন্তরিক হয়।",
+        "ধৈর্য ধারণ করো, নিশ্চয়ই আল্লাহ ধৈর্যশীলদের সাথে আছেন।",
+        "জ্ঞানের অন্বেষণ করা প্রত্যেক মুসলমানের জন্য ফরজ।",
+        "একটি ভালো কথা বলাও একটি সদকা।"
+    ];
+    document.getElementById('daily-quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+</script>
+
+<div id="weather-card" class="info-card weather-container">
+    <h3 style="color: inherit; text-align: center;"><i class="fas fa-cloud-sun"></i> সিরাজগঞ্জের লাইভ আবহাওয়া</h3>
+    <div id="weather-content" style="text-align: center;">
+        <p>আবহাওয়া লোড হচ্ছে...</p>
+    </div>
+</div>
+
+<style>
+    .weather-container {
+        transition: all 0.5s ease;
+        color: white;
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        border: none !important;
+    }
+    /* ডিফল্ট নীল আকাশ (রোদ) */
+    .weather-sunny { background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%) !important; }
+    /* মেঘলা আকাশ */
+    .weather-cloudy { background: linear-gradient(to bottom, #757f9a 0%, #d7dde8 100%) !important; }
+    /* বৃষ্টি */
+    .weather-rainy { background: linear-gradient(to bottom, #2c3e50 0%, #4ca1af 100%) !important; }
+    /* ঝড়/ঘূর্ণিঝড় */
+    .weather-stormy { background: linear-gradient(to bottom, #485563 0%, #29323c 100%) !important; }
+    /* কুয়াশা */
+    .weather-mist { background: linear-gradient(to bottom, #bdc3c7 0%, #2c3e50 100%) !important; }
+
+    .weather-icon { font-size: 50px; margin: 10px 0; animation: bounce 2s infinite; }
+</style>
+
+
+<style>
+    .prayer-box { background: var(--bg-color); padding: 10px; border-radius: 8px; transition: 0.3s; }
+    .prayer-box:hover { background: rgba(33, 147, 176, 0.1); }
+</style>
+
+
+        <div class="info-card" style="text-align: center; border: 2px solid #ff4b2b;">
+            <h3 style="color: #ff4b2b;"><i class="fas fa-calendar-alt"></i> মাহে রমজান সময়সূচী ২০২৬ (সিরাজগঞ্জ)</h3>
+            <p style="font-size: 14px; margin-bottom: 15px;">সিরাজগঞ্জ ও পার্শ্ববর্তী এলাকার সেহরি ও ইফতারের সঠিক সময়সূচী</p>
+            <div style="width: 100%; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <img src="https://i.ibb.co.com/DH9WcfZf/1000054804.jpg" alt="সিরাজগঞ্জ রমজান সময়সূচী" style="width: 100%; height: auto; display: block;">
+            </div>
+            <p style="font-size: 12px; color: #666; margin-top: 10px;">* ইসলামিক ফাউন্ডেশন বাংলাদেশ কর্তৃক নির্ধারিত সময় অনুযায়ী।</p>
+        </div>
+        
+           
+<div class="info-card">
+    <h3 style="color: var(--accent-color); text-align: center;"><i class="fas fa-users-cog"></i> আমাদের মূল নেতৃত্ব</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 15px;">
+        
+        <div style="text-align: center; width: 120px;">
+            <img src="https://i.ibb.co.com/GvXXrwf7/FB-IMG-1771418638416.jpg" alt="Founder" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-color); padding: 3px;">
+            <h4 style="font-size: 14px; margin: 8px 0 2px;">Engineer Rafiqul Islam</h4>
+            <p style="font-size: 12px; color: #666; margin: 0;">প্রতিষ্ঠাতা ও চেয়ারম্যান</p>
+        </div>
+
+        <div style="text-align: center; width: 120px;">
+            <img src="https://i.ibb.co.com/PzfpYJm9/FB-IMG-1771418626588.jpg" alt="Secretary" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-color); padding: 3px;">
+            <h4 style="font-size: 14px; margin: 8px 0 2px;">Harunor Roshid</h4>
+            <p style="font-size: 12px; color: #666; margin: 0;">প্রতিষ্ঠাতা পরিচালক</p>
+        </div>
+
+        <div style="text-align: center; width: 120px;">
+            <img src="https://i.ibb.co.com/ynnR8jyV/img-2-1771574187607.jpg" alt="Treasurer" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-color); padding: 3px;">
+            <h4 style="font-size: 14px; margin: 8px 0 2px;">MD abdus sattar</h4>
+            <p style="font-size: 12px; color: #666; margin: 0;">কোষাধ্যক্ষ</p>
+        </div>       
+        
+
+    </div>
+</div>
+       
+               <div class="info-card">
+            <h2><i class="fas fa-hand-holding-heart"></i> আমাদের লক্ষ্য ও নীতিমালা</h2>
+            <p><strong>রুপসা জনকল্যাণ ফাউন্ডেশন</strong> একটি সম্পূর্ণ <strong>অরাজনৈতিক, অলাভজনক (Non-Profit)</strong> এবং স্বেচ্ছাসেবী সামাজিক সংগঠন। আমাদের মূল লক্ষ্য আর্তমানবতার সেবা এবং সমাজের সুবিধাবঞ্চিত মানুষের জীবনমান উন্নয়ন করা।</p>
+            
+            <h3><i class="fas fa-shield-alt"></i> অরাজনৈতিক ও স্বচ্ছতা</h3>
+            <p>আমরা কোনো প্রকার রাজনৈতিক দলের সাথে সম্পৃক্ত নই। ফাউন্ডেশনের প্রতিটি কাজ স্বচ্ছ এবং জবাবদিহিতামূলক। এখানে প্রাপ্ত প্রতিটি অনুদান সরাসরি নির্দিষ্ট জনকল্যাণমূলক প্রজেক্টে ব্যয় করা হয়।</p>
+            
+            <h3><i class="fas fa-star"></i> আমাদের দীর্ঘমেয়াদী কার্যক্রম</h3>
+            <ul class="feature-list">
+                <li><i class="fas fa-check-circle"></i> <strong>শিক্ষা সহায়তা:</strong> দরিদ্র মেধাবী শিক্ষার্থীদের স্কুল উপকরণ ও আর্থিক বৃত্তি প্রদান।</li>
+                <li><i class="fas fa-check-circle"></i> <strong>স্বাস্থ্য সেবা:</strong> প্রতি মাসে ফ্রি মেডিকেল ক্যাম্প এবং মুমূর্ষু রোগীদের রক্তদানের ব্যবস্থা করা।</li>
+                <li><i class="fas fa-check-circle"></i> <strong>স্বাবলম্বীকরণ:</strong> বিধবা ও অসহায় মহিলাদের সেলাই মেশিন ও কারিগরি প্রশিক্ষণ প্রদান।</li>
+                <li><i class="fas fa-check-circle"></i> <strong>ত্রাণ বিতরণ:</strong> বন্যা, শীত বা যেকোনো প্রাকৃতিক দুর্যোগে দ্রুত খাদ্য ও বস্ত্র সহায়তা।</li>
+                <li><i class="fas fa-check-circle"></i> <strong>পরিবেশ রক্ষা:</strong> বৃক্ষরোপণ অভিযান এবং প্লাস্টিক দূষণ রোধে সচেতনতা তৈরি।</li>
+            </ul>
+        </div>
+
+        <div class="info-card" style="background: linear-gradient(135deg, var(--card-bg), #f9f9f9); border-right: 5px solid var(--accent-color); border-left: none;">
+            <h3 style="color: #ff4b2b;"><i class="fas fa-question-circle"></i> কেন আমাদের পাশে দাঁড়াবেন?</h3>
+            <p>আপনার সামান্যতম অবদান হতে পারে কারো বেঁচে থাকার নতুন স্বপ্ন। আমরা নিশ্চিত করি:</p>
+            <ul class="feature-list">
+                <li><i class="fas fa-hand-holding-usd"></i> <strong>শতভাগ আমানত:</strong> আপনার দেওয়া অনুদানের প্রতিটি পয়সা সরাসরি অসহায়ের হাতে পৌঁছে দেওয়া হয়।</li>
+                <li><i class="fas fa-users-cog"></i> <strong>সরাসরি তদারকি:</strong> আমাদের মেম্বাররা প্রতিটি কাজ সরাসরি মাঠে গিয়ে সম্পন্ন করেন।</li>
+                <li><i class="fas fa-file-invoice-dollar"></i> <strong>ব্যয়ের স্বচ্ছতা:</strong> আপনি চাইলে যেকোনো সময় আপনার দেওয়া অনুদানের ব্যয়ের আপডেট নিতে পারেন।</li>
+            </ul>
+        </div>
+
+        <div class="info-card" style="text-align: center; background: #0f1c2c; color: white;">
+            <h3 style="color: var(--accent-color);">আপনি কি আমাদের সাথে কাজ করতে চান?</h3>
+            <p style="opacity: 0.9;">আমরা সবসময় একঝাঁক তরুণ ও উদ্যমী স্বেচ্ছাসেবক খুঁজি যারা নিঃস্বার্থভাবে সমাজের জন্য কাজ করতে আগ্রহী। আমাদের টিমে যুক্ত হয়ে আপনিও হতে পারেন একজন 'চেঞ্জ মেকার'!</p>
+            <p><strong>প্রয়োজনীয় গুণাবলী:</strong> সততা, ধৈর্য এবং মানুষের প্রতি ভালোবাসা।</p>
+        </div>
+
+        <div class="info-card" style="border: 2px dashed #ff416c;">
+            <h3 style="color: #ff416c; text-align: center;"><i class="fas fa-phone-alt"></i> জরুরি প্রয়োজনে যোগাযোগ</h3>
+            <p style="text-align: center; font-size: 18px; font-weight: bold;">হটলাইন:+8801325354463 </p>
+            <p style="text-align: center; font-size: 13px;">(যেকোনো জরুরি ও সাহায্যের জন্য আমাদের ২৪ ঘন্টা কল করতে পারেন)</p>
+        </div>
+
+        <div class="info-card" style="background: linear-gradient(45deg, #0f1c2c, #1a293d); color: white;">
+            <h3 style="color: var(--accent-color); text-align: center;"><i class="fas fa-chart-line"></i> আমাদের এই পর্যন্ত পথচলা</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; margin-top: 15px;">
+                <div style="border: 1px solid rgba(0,255,170,0.3); padding: 10px; border-radius: 10px;">
+                    <h2 style="margin: 0; color: var(--accent-color);">2+</h2>
+                    <p style="margin: 0; font-size: 12px;">উপকারভোগী পরিবার</p>
+                </div>
+                <div style="border: 1px solid rgba(0,255,170,0.3); padding: 10px; border-radius: 10px;">
+                    <h2 style="margin: 0; color: var(--accent-color);">৫০+</h2>
+                    <p style="margin: 0; font-size: 12px;">সক্রিয় ভলান্টিয়ার</p>
+                </div>
+                <div style="border: 1px solid rgba(0,255,170,0.3); padding: 10px; border-radius: 10px;">
+                    <h2 style="margin: 0; color: var(--accent-color);">১+</h2>
+                    <p style="margin: 0; font-size: 12px;">সম্পন্ন প্রজেক্ট</p>
+                </div>
+                <div style="border: 1px solid rgba(0,255,170,0.3); padding: 10px; border-radius: 10px;">
+                    <h2 style="margin: 0; color: var(--accent-color);">২৪/১২</h2>
+                    <p style="margin: 0; font-size: 12px;">জরুরি সহায়তা</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://rjfoundetion-blip.github.io/donetion/" class="btn btn-donate" id="btn1"><i class="fas fa-hand-holding-heart" style="margin-right:10px"></i> ডোনেশন</a>
+        <a href="https://rjfoundetion-blip.github.io/Meeting/" class="btn btn-conference" id="btn2"><i class="fas fa-video" style="margin-right:10px"></i> লাইভ কনফারেন্স</a>
+        <a href="https://rjfoundetion-blip.github.io/member_selection/" class="btn btn-member" id="btn3"><i class="fas fa-user-plus" style="margin-right:10px"></i> মেম্বার সিলেকশন ফর্ম</a>
+
+        <div class="card">
+            <h3 id="mapTitle">Location (Map)</h3>
+            <iframe class="map-frame" src="https://www.google.com/maps?q=24.596500,89.763194&hl=bn&z=17&output=embed"></iframe>
+        </div>
+        
+        <div style="margin-top: 30px;">
+    <h3 style="color: var(--accent-color); margin-bottom: 15px;">
+        <i class="fas fa-users"></i> আমাদের ভলান্টিয়ার ও কার্যক্রম
+    </h3>
+    
+    <div class="slider-container">
+        <div class="slides" id="imageSlides">            
+            <img src="https://i.ibb.co.com/GvXXrwf7/FB-IMG-1771418638416.jpg" class="slide">
+            <img src="https://i.ibb.co.com/PzfpYJm9/FB-IMG-1771418626588.jpg" class="slide">
+            <img src="https://i.ibb.co.com/NdFZZPJv/FB-IMG-1771418171818.jpg" class="slide">
+            <img src="https://i.ibb.co.com/MxJqR5T7/IMG-20251217-100004.jpg" class="slide">
+            <img src="https://i.ibb.co.com/WvPTYxkN/FB-IMG-1771418489345.jpg" class="slide">
+        </div>                
+      </div>
+    </div>
+
+        <div class="rating-card">
+            <h3 style="color: var(--accent-color); text-align: center;"><i class="fas fa-star"></i> আমাদের রেটিং ও রিভিউ দিন</h3>
+            
+            <div class="rating-summary">
+                <div class="summary-item">
+                    <h4>মোট রেটিং</h4>
+                    <p id="totalReviewsCount">0</p>
+                </div>
+                <div class="summary-item" style="border-left: 1px solid rgba(0,0,0,0.1); border-right: 1px solid rgba(0,0,0,0.1); padding: 0 20px;">
+                    <h4>গড় রেটিং</h4>
+                    <p id="avgRatingValue">0.0</p>
+                </div>
+                <div class="summary-item">
+                    <h4>সন্তুষ্টি</h4>
+                    <p id="satisfactionPercent">0%</p>
+                </div>
+            </div>
+
+            <div class="stars" id="starGroup">
+                <i class="fas fa-star star" data-value="1"></i>
+                <i class="fas fa-star star" data-value="2"></i>
+                <i class="fas fa-star star" data-value="3"></i>
+                <i class="fas fa-star star" data-value="4"></i>
+                <i class="fas fa-star star" data-value="5"></i>
+            </div>
+            <textarea id="reviewText" class="review-input" placeholder="আপনার মূল্যবান মতামত লিখুন..." rows="3"></textarea>
+            <button class="submit-review-btn" onclick="handleReviewSubmit()">রিভিউ জমা দিন</button>
+            
+            <div class="reviews-display" id="reviewsDisplay">
+                <p style="font-size: 12px; color: #888; text-align: center;">রিভিউ লোড হচ্ছে...</p>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com/rupshajonokollanfoundation.org" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="mailto:rjfoundetion@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+            <a href="https://youtube.com/channel/UCempOBWhLCDczEKN2j859Iw?si=4S3-45yDs63FygV4" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-prompt">যেকোনো সাহায্যের জন্য যোগাযোগ করুন</div>
+        <a href="https://wa.me/8801334108089" target="_blank" class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <footer>
+    <p>&copy; <span id="currentYear"></span>2026 All rights reserved with RJfoundetion</p>
+</footer>
+
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB_YAXx35pifHIz7Dcz7fFpQ-Hc_0uu3DU",
+            authDomain: "rjfoundetion-9d2ea.firebaseapp.com",
+            projectId: "rjfoundetion-9d2ea",
+            storageBucket: "rjfoundetion-9d2ea.firebasestorage.app",
+            messagingSenderId: "895981142257",
+            appId: "1:895981142257:web:6cf55e834d1fd3e8546950"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const reviewsCollection = collection(db, "reviews");
+
+        let selectedRating = 0;
+        const stars = document.querySelectorAll('.star');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = star.getAttribute('data-value');
+                updateStars(selectedRating);
+            });
+        });
+
+        function updateStars(val) {
+            stars.forEach(s => {
+                s.classList.toggle('active', s.getAttribute('data-value') <= val);
+            });
+        }
+
+        window.handleReviewSubmit = async function() {
+            const text = document.getElementById('reviewText').value;
+            if (selectedRating === 0) return alert("দয়া করে রেটিং সিলেক্ট করুন!");
+            
+            try {
+                await addDoc(reviewsCollection, {
+                    rating: parseInt(selectedRating),
+                    comment: text,
+                    timestamp: serverTimestamp()
+                });
+                alert("আপনার রিভিউ সফলভাবে জমা হয়েছে!");
+                document.getElementById('reviewText').value = "";
+                selectedRating = 0;
+                updateStars(0);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        };
+
+        const q = query(reviewsCollection, orderBy("timestamp", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const display = document.getElementById('reviewsDisplay');
+            const totalCountEl = document.getElementById('totalReviewsCount');
+            const avgRatingEl = document.getElementById('avgRatingValue');
+            const percentEl = document.getElementById('satisfactionPercent');
+            
+            display.innerHTML = "";
+            let totalRatingSum = 0;
+            let count = 0;
+
+            if (snapshot.empty) {
+                display.innerHTML = '<p style="font-size: 12px; color: #888; text-align: center;">এখনও কোনো রিভিউ নেই।</p>';
+                totalCountEl.innerText = "0";
+                avgRatingEl.innerText = "0.0";
+                percentEl.innerText = "0%";
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                count++;
+                totalRatingSum += data.rating;
+
+                const starIcons = '<i class="fas fa-star"></i>'.repeat(data.rating);
+                display.innerHTML += `
+                    <div class="review-item">
+                        <div class="rev-stars">${starIcons}</div>
+                        <p class="rev-text">${data.comment || "মন্তব্য নেই।"}</p>
+                    </div>
+                `;
+            });
+
+            // ক্যালকুলেশন
+            const avg = (totalRatingSum / count).toFixed(1);
+            const percent = Math.round((avg / 5) * 100);
+
+            totalCountEl.innerText = count;
+            avgRatingEl.innerText = avg;
+            percentEl.innerText = percent + "%";
+        });
+    </script>
+
+    <script>
+        const ramadanSchedule = {
+            "2026-02-19": { sehri: "05:16", iftar: "17:58" },
+            "2026-02-20": { sehri: "05:15", iftar: "17:59" },
+            "2026-02-21": { sehri: "05:15", iftar: "18:00" },
+            "2026-02-22": { sehri: "05:14", iftar: "18:00" },
+            "2026-02-23": { sehri: "05:13", iftar: "18:01" },
+            "2026-02-24": { sehri: "05:12", iftar: "18:01" },
+            "2026-02-25": { sehri: "05:11", iftar: "18:02" },
+            "2026-02-26": { sehri: "05:11", iftar: "18:03" },
+            "2026-02-27": { sehri: "05:10", iftar: "18:03" },
+            "2026-02-28": { sehri: "05:09", iftar: "18:04" },
+            "2026-03-01": { sehri: "05:08", iftar: "18:05" },
+            "2026-03-02": { sehri: "05:07", iftar: "18:05" },
+            "2026-03-03": { sehri: "05:06", iftar: "18:06" },
+            "2026-03-04": { sehri: "05:06", iftar: "18:06" },
+            "2026-03-05": { sehri: "05:06", iftar: "18:07" },
+            "2026-03-06": { sehri: "05:04", iftar: "18:07" },
+            "2026-03-07": { sehri: "05:03", iftar: "18:08" },
+            "2026-03-08": { sehri: "05:02", iftar: "18:08" },
+            "2026-03-09": { sehri: "05:01", iftar: "18:09" },
+            "2026-03-10": { sehri: "05:00", iftar: "18:09" },
+            "2026-03-11": { sehri: "04:59", iftar: "18:10" },
+            "2026-03-12": { sehri: "04:58", iftar: "18:10" },
+            "2026-03-13": { sehri: "04:57", iftar: "18:10" },
+            "2026-03-14": { sehri: "04:56", iftar: "18:11" },
+            "2026-03-15": { sehri: "04:55", iftar: "18:11" },
+            "2026-03-16": { sehri: "04:54", iftar: "18:12" },
+            "2026-03-17": { sehri: "04:53", iftar: "18:12" },
+            "2026-03-18": { sehri: "04:52", iftar: "18:12" },
+            "2026-03-19": { sehri: "04:51", iftar: "18:12" },
+            "2026-03-20": { sehri: "04:50", iftar: "18:12" }
+        };
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-theme');
+            const icon = document.querySelector('#themeIcon i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        let currentLang = 'bn';
+        function toggleLanguage() {
+            const elements = {
+                title: document.getElementById('title'),
+                btn1: document.getElementById('btn1'),
+                btn2: document.getElementById('btn2'),
+                btn3: document.getElementById('btn3'),
+                langBtn: document.getElementById('langBtn')
+            };
+
+            if (currentLang === 'bn') {
+                elements.title.innerText = "Rupsha Public Welfare Foundation";
+                elements.btn1.innerHTML = '<i class="fas fa-hand-holding-heart" style="margin-right:10px"></i> Donation';
+                elements.btn2.innerHTML = '<i class="fas fa-video" style="margin-right:10px"></i> Live Conference';
+                elements.btn3.innerHTML = '<i class="fas fa-user-plus" style="margin-right:10px"></i> Member Selection Form';
+                elements.langBtn.innerText = "বাংলা";
+                currentLang = 'en';
+            } else {
+                elements.title.innerText = "রুপসা জনকল্যাণ ফাউন্ডেশন ";
+                elements.btn1.innerHTML = '<i class="fas fa-hand-holding-heart" style="margin-right:10px"></i> ডোনেশন';
+                elements.btn2.innerHTML = '<i class="fas fa-video" style="margin-right:10px"></i> লাইভ কনফারেন্স';
+                elements.btn3.innerHTML = '<i class="fas fa-user-plus" style="margin-right:10px"></i> মেম্বার সিলেকশন ফর্ম';
+                elements.langBtn.innerText = "English";
+                currentLang = 'bn';
+            }
+        }
+
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'OgnlB5MsJx0',
+                playerVars: { 'rel': 0, 'modestbranding': 1, 'controls': 1 },
+            });
+        }
+
+        function likeVideo(btn) {
+            if(btn.dataset.liked === "true") {
+                btn.dataset.liked = "false";
+                btn.innerHTML = '<i class="fas fa-heart"></i> Like';
+            } else {
+                btn.dataset.liked = "true";
+                btn.innerHTML = '<i class="fas fa-heart" style="color:#38ef7d"></i> Liked';
+            }
+        }
+
+        function changeVolume(amount) {
+            if(player && player.getVolume) {
+                let vol = player.getVolume();
+                vol += amount * 100;
+                vol = Math.max(0, Math.min(100, vol));
+                player.setVolume(vol);
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayKey = `${year}-${month}-${day}`;
+
+            const schedule = ramadanSchedule[todayKey];
+
+            if (!schedule) {
+                document.getElementById("timer-title").innerText = "মাহে রমজান ২০২৬";
+                document.getElementById("timer-status").innerText = "সিরাজগঞ্জ সময়সূচী";
+                document.getElementById("countdown").innerText = "আসছে...";
+                return;
+            }
+
+            const sehriTime = new Date(now.toDateString() + ' ' + schedule.sehri);
+            const iftarTime = new Date(now.toDateString() + ' ' + schedule.iftar);
+
+            let target, title, status;
+
+            if (now < sehriTime) {
+                target = sehriTime;
+                title = "পরবর্তী ইভেন্ট: সেহরি";
+                status = "সেহরির শেষ সময় বাকি";
+            } else if (now < iftarTime) {
+                target = iftarTime;
+                title = "পরবর্তী ইভেন্ট: ইফতার";
+                status = "ইফতারের আর বাকি আছে";
+            } else {
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                const tYear = tomorrow.getFullYear();
+                const tMonth = String(tomorrow.getMonth() + 1).padStart(2, '0');
+                const tDay = String(tomorrow.getDate()).padStart(2, '0');
+                const tomorrowKey = `${tYear}-${tMonth}-${tDay}`;
+                const nextSchedule = ramadanSchedule[tomorrowKey];
+
+                if (nextSchedule) {
+                    target = new Date(tomorrow.toDateString() + ' ' + nextSchedule.sehri);
+                    title = "পরবর্তী ইভেন্ট: সেহরি (আগামীকাল)";
+                    status = "সেহরির বাকি আছে";
+                } else {
+                    document.getElementById("timer-title").innerText = "ইদ মোবারক!";
+                    document.getElementById("countdown").innerText = "--:--:--";
+                    return;
+                }
+            }
+
+            const diff = target - now;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById("timer-title").innerHTML = `<i class="fas fa-clock"></i> ${title}`;
+            document.getElementById("timer-status").innerText = status;
+            document.getElementById("countdown").innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        const slidesContainer = document.getElementById('imageSlides');
+        const allSlides = document.querySelectorAll('.slide');
+        let slideCounter = 0;
+
+        function moveSlider() {
+            slidesContainer.style.transform = `translateX(${-slideCounter * 100}%)`;
+        }
+
+        function startAutoSlide() {
+            slideCounter++;
+            if(slideCounter >= allSlides.length) {
+                slideCounter = 0; 
+            }
+            moveSlider();
+        }
+        setInterval(startAutoSlide, 4000); 
+        
+        async function getPrayerTimes() {
+    const lat = 24.4577; // সিরাজগঞ্জ Latitude
+    const lon = 89.7086; // সিরাজগঞ্জ Longitude
+    const method = 1; // University of Islamic Sciences, Karachi (বাংলাদেশি স্ট্যান্ডার্ডের কাছাকাছি)
+
+    try {
+        const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=${method}&school=1`);
+        const data = await response.json();
+        const timings = data.data.timings;
+        const dateInfo = data.data.date;
+
+        // সময়গুলো HTML-এ বসানো
+        document.getElementById('fajr').innerText = convertTo12Hour(timings.Fajr);
+        document.getElementById('dhuhr').innerText = convertTo12Hour(timings.Dhuhr);
+        document.getElementById('asr').innerText = convertTo12Hour(timings.Asr);
+        document.getElementById('maghrib').innerText = convertTo12Hour(timings.Maghrib);
+        document.getElementById('isha').innerText = convertTo12Hour(timings.Isha);
+        document.getElementById('sunrise').innerText = convertTo12Hour(timings.Sunrise);
+
+        // তারিখ আপডেট
+        document.getElementById('current-date-prayer').innerText = `${dateInfo.readable} | ${dateInfo.hijri.day} ${dateInfo.hijri.month.en}`;
+
+    } catch (error) {
+        console.error("Prayer times fetch failed:", error);
+        document.getElementById('current-date-prayer').innerText = "ইন্টারনেট সংযোগ চেক করুন";
+    }
+}
+
+// ২৪ ঘণ্টা সময়কে ১২ ঘণ্টায় রূপান্তর করার ফাংশন
+function convertTo12Hour(time) {
+    let [hours, minutes] = time.split(':');
+    hours = parseInt(hours);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${ampm}`;
+}
+
+// পেজ লোড হলে ফাংশনটি কল হবে
+getPrayerTimes();
+
+async function updateWeather() {
+    // এই API Key টি যদি কাজ না করে, তবে ২ ঘণ্টা অপেক্ষা করুন অথবা নতুন একটি নিন
+    const apiKey = '09e271a850c5810bbc640127afeac106'; 
+    const city = 'Sirajganj';
+    const card = document.getElementById('weather-card');
+    const content = document.getElementById('weather-content');
+
+    if(!card || !content) return; // আইডি খুঁজে না পেলে কাজ করবে না
+
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+        
+        if (!response.ok) {
+            throw new Error("সিটি খুঁজে পাওয়া যায়নি বা কী ইনভ্যালিড");
+        }
+
+        const data = await response.json();
+        const temp = Math.round(data.main.temp);
+        const condition = data.weather[0].main.toLowerCase();
+
+        let icon = 'fa-sun';
+        let bgClass = 'weather-sunny';
+        let statusText = "পরিষ্কার আকাশ";
+
+        // কন্ডিশন চেক
+        if (condition.includes('cloud')) {
+            icon = 'fa-cloud';
+            bgClass = 'weather-cloudy';
+            statusText = "মেঘলা আকাশ";
+        } else if (condition.includes('rain') || condition.includes('drizzle')) {
+            icon = 'fa-cloud-showers-heavy';
+            bgClass = 'weather-rainy';
+            statusText = "বৃষ্টি হচ্ছে";
+        } else if (condition.includes('thunderstorm')) {
+            icon = 'fa-bolt';
+            bgClass = 'weather-stormy';
+            statusText = "বজ্রঝড় ও সতর্কতা";
+        } else if (condition.includes('mist') || condition.includes('haze')) {
+            icon = 'fa-smog';
+            bgClass = 'weather-mist';
+            statusText = "কুয়াশা বা কুয়াশাচ্ছন্ন";
+        }
+
+        card.className = `info-card weather-container ${bgClass}`;
+        content.innerHTML = `
+            <div class="weather-icon"><i class="fas ${icon}"></i></div>
+            <div style="font-size: 32px; font-weight: bold;">${temp}°C</div>
+            <div style="font-size: 18px;">${statusText}</div>
+            <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">বাতাসের আর্দ্রতা: ${data.main.humidity}%</div>
+        `;
+
+    } catch (error) {
+        console.log(error);
+        content.innerHTML = `
+            <p style="font-size: 13px;">তথ্য লোড হতে সমস্যা হচ্ছে...</p>
+            <button onclick="updateWeather()" style="background:white; border:none; padding:5px 10px; border-radius:15px; cursor:pointer; font-size:12px;">আবার চেষ্টা করুন</button>
+        `;
+    }
+}
+    </script>
+</body>
+</html>
