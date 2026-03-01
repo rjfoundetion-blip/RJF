@@ -214,6 +214,95 @@
             40% {transform: translateY(-5px);}
             60% {transform: translateY(-3px);}
         }
+        /* হোয়াটসঅ্যাপ কন্টেইনার */
+.chat-container {
+    position: fixed;
+    bottom: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+/* প্রম্পট বক্সটি আরও সুন্দর করা হয়েছে */
+.chat-prompt {
+    background: #ffffff;
+    color: #075e54;
+    padding: 5px 5px;
+    border-radius: 23px 23px 3px 23px; /* রাউন্ডেড শেপ */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-size: 12px;
+    font-weight: 6020;
+    border: 1px solid #25D366;
+    animation: floatingText 1.2s ease-in-out infinite;
+    position: relative;
+}
+
+/* মেইন হোয়াটসঅ্যাপ বাটন */
+.whatsapp-float {
+    background: #25D366;
+    color: White;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    text-decoration: none;
+    box-shadow: 0 8px 15px rgba(37, 211, 102, 0.5);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.2); /* মাউস নিলে একটু বড় হবে */
+}
+
+/* পানির ঢেউ বা Ripple এনিমেশন লেয়ার */
+.whatsapp-float::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #25D366;
+    border-radius: 100%;
+    z-index: -1;
+    animation: waterRipple 2s linear infinite;
+}
+
+.whatsapp-float::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #25D366;
+    border-radius: 50%;
+    z-index: -1;
+    animation: waterRipple 1s linear infinite;
+    animation-delay: 1s; /* দ্বিতীয় ঢেউ ১ সেকেন্ড পর আসবে */
+}
+
+/* কী-ফ্রেম এনিমেশন */
+@keyframes waterRipple {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    100% {
+        transform: scale(1.8); /* ঢেউ কত বড় হবে */
+        opacity: 0;
+        box-shadow: 0 0 0 5px rgba(37, 211, 102, 0);
+    }
+}
+
+@keyframes floatingText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
 
         /* স্লাইডারের স্টাইল */
         .slider-container {
