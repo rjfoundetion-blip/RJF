@@ -766,9 +766,12 @@
     </div>
 
     <footer>
-    <p>&copy; <span id="currentYear"></span>2026 All rights reserved with RJfoundetion</p>
+    <p>© <span id="displayYear"></span> All rights reserved with RJfoundation</p>
 </footer>
 
+<script>
+    document.getElementById('displayYear').innerText = new Date().getFullYear();
+</script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
 
